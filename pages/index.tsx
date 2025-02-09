@@ -122,18 +122,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="relative flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10 overflow-hidden">
+      <div className="relative flex h-full min-h-screen flex-col items-center bg-black px-4 pb-20 text-neutral-200 sm:px-10 overflow-hidden">
         <div 
           className="absolute inset-0 pointer-events-none" 
           style={{
             backgroundImage: 'url(/logo.png)',
-            backgroundSize: 'cover',
+            backgroundSize: '75%',
             backgroundPosition: 'center',
-            opacity: 0.2,
-            width: '150%',
-            height: '150%',
-            top: '-25%',
-            left: '-25%',
+            backgroundRepeat: 'no-repeat',
+            opacity: 0.15,
             zIndex: 0
           }}
         />
@@ -142,9 +139,9 @@ export default function Home() {
           <div className="text-4xl font-bold">Mojo Translate</div>
         </div>
 
-        <div className="mt-2 flex items-center space-x-2">
+        <div className="mt-2 flex flex-col items-center space-y-2">
           <ModelSelect model={model} onChange={(value) => setModel(value)} />
-
+          
           <button
             className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
             onClick={() => handleTranslate()}
