@@ -76,10 +76,10 @@ export const GeminiStream = async (
   key: string,
 ) => {
   const genAI = new GoogleGenerativeAI(key);
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-pro-exp' as const });
+  const genModel = genAI.getGenerativeModel({ model: model });
 
   const prompt = createPrompt(inputLanguage, outputLanguage, inputCode);
-  const result = await model.generateContentStream([prompt]);
+  const result = await genModel.generateContentStream([prompt]);
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
