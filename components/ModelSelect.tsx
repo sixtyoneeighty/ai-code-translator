@@ -1,14 +1,17 @@
-import { OpenAIModel } from '@/types/types';
+import { AIModel } from '@/types/types';
 import { FC } from 'react';
 
+// Using constant for model name
+const GEMINI_MODEL = 'gemini-2.0-pro-exp' as const;
+
 interface Props {
-  model: OpenAIModel;
-  onChange: (model: OpenAIModel) => void;
+  model: AIModel;
+  onChange: (model: AIModel) => void;
 }
 
 export const ModelSelect: FC<Props> = ({ model, onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value as OpenAIModel);
+    onChange(e.target.value as AIModel);
   };
 
   return (
@@ -17,8 +20,7 @@ export const ModelSelect: FC<Props> = ({ model, onChange }) => {
       value={model}
       onChange={handleChange}
     >
-      <option value="gpt-3.5-turbo">GPT-3.5</option>
-      <option value="gpt-4">GPT-4</option>
+      <option value={GEMINI_MODEL}>Gemini 2.0 Pro</option>
     </select>
   );
 };

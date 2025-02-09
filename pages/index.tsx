@@ -3,7 +3,10 @@ import { CodeBlock } from '@/components/CodeBlock';
 import { LanguageSelect } from '@/components/LanguageSelect';
 import { ModelSelect } from '@/components/ModelSelect';
 import { TextBlock } from '@/components/TextBlock';
-import { OpenAIModel, TranslateBody } from '@/types/types';
+import { AIModel, TranslateBody } from '@/types/types';
+
+// Using constant for model name
+const GEMINI_MODEL = 'gemini-2.0-pro-exp' as const;
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
@@ -12,18 +15,13 @@ export default function Home() {
   const [outputLanguage, setOutputLanguage] = useState<string>('Python');
   const [inputCode, setInputCode] = useState<string>('');
   const [outputCode, setOutputCode] = useState<string>('');
-  const [model, setModel] = useState<OpenAIModel>('gpt-3.5-turbo');
+  const [model, setModel] = useState<AIModel>(GEMINI_MODEL);
   const [loading, setLoading] = useState<boolean>(false);
   const [hasTranslated, setHasTranslated] = useState<boolean>(false);
-  const [apiKey, setApiKey] = useState<string>('');
+
 
   const handleTranslate = async () => {
-    const maxCodeLength = model === 'gpt-3.5-turbo' ? 6000 : 12000;
-
-    if (!apiKey) {
-      alert('Please enter an API key.');
-      return;
-    }
+    const maxCodeLength = model === 'gemini-2.0-pro-exp' ? 8000 : 14000;
 
     if (inputLanguage === outputLanguage) {
       alert('Please select different languages.');
@@ -52,7 +50,7 @@ export default function Home() {
       outputLanguage,
       inputCode,
       model,
-      apiKey,
+
     };
 
     const response = await fetch('/api/translate', {
@@ -107,25 +105,11 @@ export default function Home() {
     document.body.removeChild(el);
   };
 
-  const handleApiKeyChange = (value: string) => {
-    setApiKey(value);
-
-    localStorage.setItem('apiKey', value);
-  };
-
   useEffect(() => {
     if (hasTranslated) {
       handleTranslate();
     }
   }, [outputLanguage]);
-
-  useEffect(() => {
-    const apiKey = localStorage.getItem('apiKey');
-
-    if (apiKey) {
-      setApiKey(apiKey);
-    }
-  }, []);
 
   return (
     <>
@@ -133,18 +117,14 @@ export default function Home() {
         <title>Code Translator</title>
         <meta
           name="description"
-          content="Use AI to translate code from one language to another."
+          content="Just because Mojo doesn't speak like us, does not mean he isn't fluent in many relevant languages."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
         <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
-          <div className="text-4xl font-bold">AI Code Translator</div>
-        </div>
-
-        <div className="mt-6 text-center text-sm">
-          <APIKeyInput apiKey={apiKey} onChange={handleApiKeyChange} />
+          <div className="text-4xl font-bold">Mojo Translate</div>
         </div>
 
         <div className="mt-2 flex items-center space-x-2">

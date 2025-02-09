@@ -1,5 +1,5 @@
 import { TranslateBody } from '@/types/types';
-import { OpenAIStream } from '@/utils';
+import { GeminiStream } from '@/utils';
 
 export const config = {
   runtime: 'edge',
@@ -7,10 +7,13 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { inputLanguage, outputLanguage, inputCode, model, apiKey } =
+    const { inputLanguage, outputLanguage, inputCode, model } =
       (await req.json()) as TranslateBody;
 
-    const stream = await OpenAIStream(
+    // Use Google API key from environment variable
+    const apiKey = process.env.GOOGLE_API_KEY;
+
+    const stream = await GeminiStream(
       inputLanguage,
       outputLanguage,
       inputCode,

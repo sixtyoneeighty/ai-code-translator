@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@codemirror/legacy-modes": "^6.3.2",
+    "@google/generative-ai": "^0.21.0",
     "@uiw/codemirror-theme-tokyo-night": "^4.19.11",
     "@uiw/react-codemirror": "^4.19.11",
+    "ai": "^4.1.26",
     "endent": "^2.1.0",
     "eventsource-parser": "^1.0.0",
     "next": "13.2.4",
