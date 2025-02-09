@@ -72,6 +72,7 @@ export const GeminiStream = async (
   inputLanguage: string,
   outputLanguage: string,
   inputCode: string,
+  model: string,
   key: string,
 ) => {
   const genAI = new GoogleGenerativeAI(key);

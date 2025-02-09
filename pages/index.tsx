@@ -122,7 +122,22 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
+      <div className="relative flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10 overflow-hidden">
+        <div 
+          className="absolute inset-0 pointer-events-none" 
+          style={{
+            backgroundImage: 'url(/logo.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.2,
+            width: '150%',
+            height: '150%',
+            top: '-25%',
+            left: '-25%',
+            zIndex: 0
+          }}
+        />
+        <div className="relative z-10 w-full">
         <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
           <div className="text-4xl font-bold">Mojo Translate</div>
         </div>
@@ -198,6 +213,7 @@ export default function Home() {
               <CodeBlock code={outputCode} />
             )}
           </div>
+        </div>
         </div>
       </div>
     </>

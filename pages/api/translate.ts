@@ -18,7 +18,7 @@ const handler = async (req: Request): Promise<Response> => {
       outputLanguage,
       inputCode,
       model,
-      apiKey,
+      apiKey || ''
     );
 
     return new Response(stream);
